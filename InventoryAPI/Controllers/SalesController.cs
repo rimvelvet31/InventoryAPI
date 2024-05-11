@@ -43,34 +43,34 @@ namespace InventoryAPI.Controllers
 
         // PUT: api/Sales/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSale(long id, Sale sale)
-        {
-            if (id != sale.Id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutSale(long id, Sale sale)
+        //{
+        //    if (id != sale.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(sale).State = EntityState.Modified;
+        //    _context.Entry(sale).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SaleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!SaleExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Sales
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -83,25 +83,25 @@ namespace InventoryAPI.Controllers
             return CreatedAtAction("GetSale", new { id = sale.Id }, sale);
         }
 
-        // DELETE: api/Sales/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSale(long id)
-        {
-            var sale = await _context.Sales.FindAsync(id);
-            if (sale == null)
-            {
-                return NotFound();
-            }
+    // DELETE: api/Sales/5
+    //    [HttpDelete("{id}")]
+    //    public async Task<IActionResult> DeleteSale(long id)
+    //    {
+    //        var sale = await _context.Sales.FindAsync(id);
+    //        if (sale == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            _context.Sales.Remove(sale);
-            await _context.SaveChangesAsync();
+    //        _context.Sales.Remove(sale);
+    //        await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+    //        return NoContent();
+    //    }
 
-        private bool SaleExists(long id)
-        {
-            return _context.Sales.Any(e => e.Id == id);
-        }
+    //    private bool SaleExists(long id)
+    //    {
+    //        return _context.Sales.Any(e => e.Id == id);
+    //    }
     }
 }
