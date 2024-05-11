@@ -24,14 +24,14 @@ namespace InventoryAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sale>>> GetSales()
         {
-            return await _context.Sales.ToListAsync();
+            return await _context.Sales.Include(s => s.Product).ToListAsync();
         }
 
         // GET: api/Sales/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Sale>> GetSale(long id)
         {
-            var sale = await _context.Sales.FindAsync(id);
+            var sale = await _context.Sales.Include(s => s.Product).FirstOrDefaultAsync(s => s.Id == id);
 
             if (sale == null)
             {
@@ -91,6 +91,8 @@ namespace InventoryAPI.Controllers
             sale.TotalPrice = sale.QuantitySold * product.UnitPrice;
 
             product.Quantity -= sale.QuantitySold;
+
+            sale.Product = product;
 
             _context.Sales.Add(sale);
             await _context.SaveChangesAsync();
