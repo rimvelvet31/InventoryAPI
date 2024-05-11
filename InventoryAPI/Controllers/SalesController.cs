@@ -77,31 +77,46 @@ namespace InventoryAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Sale>> PostSale(Sale sale)
         {
+            var product = await _context.Products.FindAsync(sale.ProductId);
+            if (product == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            if (sale.QuantitySold > product.Quantity || sale.QuantitySold <= 0)
+            {
+                return BadRequest("Sale quantity invalid.");
+            }
+
+            sale.TotalPrice = sale.QuantitySold * product.UnitPrice;
+
+            product.Quantity -= sale.QuantitySold;
+
             _context.Sales.Add(sale);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetSale", new { id = sale.Id }, sale);
         }
 
-    // DELETE: api/Sales/5
-    //    [HttpDelete("{id}")]
-    //    public async Task<IActionResult> DeleteSale(long id)
-    //    {
-    //        var sale = await _context.Sales.FindAsync(id);
-    //        if (sale == null)
-    //        {
-    //            return NotFound();
-    //        }
+        // DELETE: api/Sales/5
+        //    [HttpDelete("{id}")]
+        //    public async Task<IActionResult> DeleteSale(long id)
+        //    {
+        //        var sale = await _context.Sales.FindAsync(id);
+        //        if (sale == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-    //        _context.Sales.Remove(sale);
-    //        await _context.SaveChangesAsync();
+        //        _context.Sales.Remove(sale);
+        //        await _context.SaveChangesAsync();
 
-    //        return NoContent();
-    //    }
+        //        return NoContent();
+        //    }
 
-    //    private bool SaleExists(long id)
-    //    {
-    //        return _context.Sales.Any(e => e.Id == id);
-    //    }
+        //    private bool SaleExists(long id)
+        //    {
+        //        return _context.Sales.Any(e => e.Id == id);
+        //    }
     }
 }
