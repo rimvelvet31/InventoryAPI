@@ -8,7 +8,7 @@ namespace InventoryAPI.Models
         public required string Name { get; set; }
         public required string Description { get; set; }
         public required string Category { get; set; }
-        public required string ImgUrl { get; set; }
+        public required string ImgData { get; set; }
 
         [Range(0, double.MaxValue)]
         public required decimal UnitPrice { get; set; }

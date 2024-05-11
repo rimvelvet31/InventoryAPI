@@ -92,8 +92,6 @@ namespace InventoryAPI.Controllers
 
             product.Quantity -= sale.QuantitySold;
 
-            sale.Product = product;
-
             _context.Sales.Add(sale);
             await _context.SaveChangesAsync();
 
