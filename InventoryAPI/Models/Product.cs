@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryAPI.Models
 {
@@ -7,7 +8,12 @@ namespace InventoryAPI.Models
         public long Id { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
-        public required string Category { get; set; }
+
+        public required long CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public Category? Category { get; set; }
+
         public required string ImgData { get; set; }
 
         [Range(0, double.MaxValue)]
