@@ -77,6 +77,7 @@ namespace InventoryAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Sale>> PostSale(Sale sale)
         {
+            // Get product
             var product = await _context.Products.FindAsync(sale.ProductId);
             if (product == null)
             {

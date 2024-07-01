@@ -11,6 +11,7 @@ namespace InventoryAPI.Models
         // Register models here
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<Sale> Sales { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null!;
 
         // Map decimal types to real type in SQLite
         protected override void OnModelCreating(ModelBuilder modelBuilder)
