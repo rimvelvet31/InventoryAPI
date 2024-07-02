@@ -5,7 +5,7 @@
 namespace InventoryAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class RemovedRequiredFromDateSold : Migration
+    public partial class RenderSetup5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

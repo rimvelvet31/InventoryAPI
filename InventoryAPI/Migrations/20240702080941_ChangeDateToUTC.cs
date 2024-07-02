@@ -5,7 +5,7 @@
 namespace InventoryAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class RemovedRequiredForTotalPrice : Migration
+    public partial class ChangeDateToUTC : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

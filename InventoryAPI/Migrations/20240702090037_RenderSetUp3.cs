@@ -5,7 +5,7 @@
 namespace InventoryAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCategoryRelationship3 : Migration
+    public partial class RenderSetUp3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
