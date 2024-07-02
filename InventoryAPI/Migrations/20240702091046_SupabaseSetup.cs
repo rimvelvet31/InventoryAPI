@@ -5,7 +5,7 @@
 namespace InventoryAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCategoryRelationship5 : Migration
+    public partial class SupabaseSetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

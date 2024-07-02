@@ -5,7 +5,7 @@
 namespace InventoryAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class SwitchedForeignKey : Migration
+    public partial class SupabaseSetup2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

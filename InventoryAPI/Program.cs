@@ -1,15 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using InventoryAPI.Models;
+using InventoryAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 // Database connection
-builder.Services.AddDbContext<InventoryContext>(opt =>
-    opt.UseSqlite(@"Data Source=./Database/Inventory.db"));
+builder.Services.AddDbContext<InventoryContext>(options =>
+    options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONN")));
+
+// Register Analytics Service
+builder.Services.AddScoped<IAnalyticsService, AnalyticsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

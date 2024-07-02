@@ -13,18 +13,24 @@ namespace InventoryAPI.Models
         public DbSet<Sale> Sales { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
 
-        // Map decimal types to real type in SQLite
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>(b =>
-            {
-                b.Property(p => p.UnitPrice).HasColumnType("REAL");
-            });
+        {            
+            // Configure model relationships
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId);
 
-            modelBuilder.Entity<Sale>(b =>
-            {
-                b.Property(s => s.TotalPrice).HasColumnType("REAL");
-            });
+            modelBuilder.Entity<Category>()
+                .HasMany(c => c.Products)
+                .WithOne(p => p.Category)
+                .HasForeignKey(p => p.CategoryId);
+
+            modelBuilder.Entity<Sale>()
+                .HasOne(s => s.Product)
+                .WithMany(p => p.Sales)
+                .HasForeignKey(s => s.ProductId);
         }
     }
 }

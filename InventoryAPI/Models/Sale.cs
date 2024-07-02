@@ -7,16 +7,19 @@ namespace InventoryAPI.Models
     {
         public long Id { get; set; }
 
+        [Required]
+        public long ProductId { get; set; }
+
         [Range(0, int.MaxValue)]
-        public required int QuantitySold { get; set; }
+        [Required]
+        public int QuantitySold { get; set; }
 
-        [ForeignKey("ProductId")]
-        public required long ProductId { get; set; }
-
-        public virtual Product? Product { get; set; }
-
+        [Range(0, double.MaxValue)]
         public decimal TotalPrice { get; set; }
 
-        public DateTime DateSold { get; set; } = DateTime.Now;
+        public DateTime DateSold { get; set; } = DateTime.UtcNow;
+
+        [ForeignKey("ProductId")]
+        public virtual Product? Product { get; set; }
     }
 }
